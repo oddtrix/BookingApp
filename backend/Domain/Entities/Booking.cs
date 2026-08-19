@@ -16,7 +16,7 @@ namespace Domain.Entities
 
         public BookingStatus Status { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public Resource Resource { get; set; }
     }
