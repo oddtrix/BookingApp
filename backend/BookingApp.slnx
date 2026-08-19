@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="BookingApp.Api/BookingApp.Api.csproj" />
   <Project Path="Domain/Domain.csproj" Id="4c5b09e0-d13b-41cb-88f0-9f5f03eefcb2" />
+  <Project Path="Infrastructure/Infrastructure.csproj" Id="67777887-bf87-4948-bbb2-0d7db12ee12f" />
 </Solution>
