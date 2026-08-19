@@ -10,5 +10,13 @@ namespace Infrastructure
         public DbSet<Booking> Bookings { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Booking).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Resource).Assembly);
+        }
     }
 }
