@@ -16,6 +16,8 @@ namespace BookingApp.Api
             services.AddControllers();
             services.AddSwaggerConfiguration();
 
+            services.AddGlobalExceptionHandlerConfiguration();
+
             string connectionString = Configuration["ConnectionStrings:BookingDb"];
             services.AddDatabaseConfiguration(connectionString);
 
@@ -34,9 +36,10 @@ namespace BookingApp.Api
             app.UseCors();
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {
