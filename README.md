@@ -13,7 +13,7 @@ Full-stack application for managing resources and bookings.
 - TanStack Router
 - Docker / Docker Compose
 
-## Features
+## Features (without an additional part)
 
 ### Backend
 
