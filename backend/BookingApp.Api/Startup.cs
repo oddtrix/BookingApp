@@ -1,4 +1,6 @@
 ﻿using BookingApp.Api.ServiceExtensions;
+using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingApp.Api
 {
@@ -18,7 +20,7 @@ namespace BookingApp.Api
 
             services.AddGlobalExceptionHandlerConfiguration();
 
-            string connectionString = Configuration["ConnectionStrings:BookingDb"];
+            string connectionString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDatabaseConfiguration(connectionString);
 
             services.AddDependencyInjectionConfiguration();
@@ -34,6 +36,13 @@ namespace BookingApp.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
         {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<Context>();
+
+                dbContext.Database.Migrate();
+            }
+
             if (environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
