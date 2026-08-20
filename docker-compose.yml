@@ -1,0 +1,46 @@
+services:
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: booking-app-db
+
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+
+    ports:
+      - "1433:1433"
+
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+    networks:
+      - booking-app-network
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: BookingApp.Api/Dockerfile
+
+    container_name: booking-app-api
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=MyAppDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+
+    ports:
+      - "5000:8080"
+
+    depends_on:
+      - db
+
+    networks:
+      - booking-app-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  booking-app-network:
+    driver: bridge
