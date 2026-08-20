@@ -38,6 +38,22 @@ services:
     networks:
       - booking-app-network
 
+  frontend:
+      build:
+        context: ./frontend
+        dockerfile: Dockerfile
+
+      container_name: booking-app-frontend
+
+      ports:
+        - "3000:80"
+
+      depends_on:
+        - api
+
+      networks:
+        - booking-app-network
+
 volumes:
   sqlserver_data:
 
