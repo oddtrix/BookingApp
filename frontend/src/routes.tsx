@@ -2,13 +2,17 @@ import { createRootRoute, createRoute, createRouter, Link, Outlet } from "@tanst
 import { BookingForm } from "./components/BookingForm";
 import { BookingsTable } from "./components/BookingsTable";
 import { useState } from "react";
+import { ResourcesPage } from "./components/ResourcesPage";
   
 const root = createRootRoute({
     component: () => (
         <main className="mx-auto max-w-6xl p-6">
             <nav className="mb-6 flex gap-4">
-                <Link to="/" className="font-bold hover:underline">
+                <Link to="/" className="font-bold hover:underline [&.active]:text-blue-600">
                     Bookings
+                </Link>
+                <Link to="/resources" className="font-bold hover:underline [&.active]:text-blue-600">
+                    Resources
                 </Link>
             </nav>
             <Outlet />
@@ -34,6 +38,12 @@ const indexRoute = createRoute({
     }
 });
 
-const routeTree = root.addChildren([indexRoute]);
+const resourcesRoute = createRoute({
+    getParentRoute: () => root,
+    path: "/resources",
+    component: ResourcesPage,
+});
+
+const routeTree = root.addChildren([indexRoute, resourcesRoute]);
 
 export const router = createRouter({ routeTree });
