@@ -24,14 +24,6 @@ namespace BookingApp.Api
             services.AddDatabaseConfiguration(connectionString);
 
             services.AddDependencyInjectionConfiguration();
-
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
-                });
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
@@ -40,7 +32,10 @@ namespace BookingApp.Api
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<Context>();
 
-                dbContext.Database.Migrate();
+                if (!dbContext.Database.CanConnect())
+                {
+                    dbContext.Database.Migrate();
+                }
             }
 
             if (environment.IsDevelopment())
