@@ -48,6 +48,6 @@ Start the entire application with:
 
 ```bash
 docker compose up --build
-
+```
 To view the complete API interactive documentation and test the endpoints, follow this link:
 - http://localhost:5000/swagger/index.html (after the project launches)
