@@ -8,6 +8,8 @@ export type Resource = {
 
 export type BookingStatus = "Pending" | "Confirmed" | "Cancelled";
 
+export type ResourceType = "Room" | "Hall" | "Gym";
+
 export type Booking = {
   id: Guid;
   resourceId: number;
