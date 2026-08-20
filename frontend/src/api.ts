@@ -1,7 +1,7 @@
 import type { Booking, Guid, Resource } from "./types";
 
 const request = async <T>(url: string, options?: RequestInit): Promise<T> => {
-    const res = await fetch(`https://localhost:7273/api${url}`, {
+    const res = await fetch(`/api${url}`, {
       headers: { "Content-Type": "application/json" },
       ...options,
     });
