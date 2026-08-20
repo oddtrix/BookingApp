@@ -20,6 +20,11 @@ namespace ApplicationCore.Services
 
         public async Task<BookingResponse> CreateAsync(CreateBookingRequest request)
         {
+            if (request.StartTime < DateTime.UtcNow)
+            {
+                return new BookingResponse { Error = ErrorMessages.BookingsMustStartFromTheCurrentTime };
+            }
+
             if (request.StartTime >= request.EndTime)
             {
                 return new BookingResponse { Error = ErrorMessages.EndTimeMustBeGreaterThanStartTime };

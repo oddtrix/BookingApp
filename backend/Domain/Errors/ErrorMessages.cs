@@ -3,6 +3,7 @@
     public static class ErrorMessages
     {
         public const string EndTimeMustBeGreaterThanStartTime = "EndTime must be greater than StartTime.";
+        public const string BookingsMustStartFromTheCurrentTime = "Bookings must start from the current time or later.";
         public const string ResourceNotFound = "Resource not found.";
         public const string ResourceIsInactive = "Resource is inactive.";
         public const string SelectedSlotIsBooked = "The selected time slot is already booked.";
